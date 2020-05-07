@@ -1,15 +1,31 @@
 
 // Return the largest element of array (all elements will be numbers), e.g. [1,2,3] → 3
-function getLargestItemInArray(array) {
-    let largestVal;
-
-    return largestVal;
-}
-
+console.log('Oefening 1');
+let array = [1,3,7,11,2];
+let largestVal;
+    function getLargestItemInArray(array) 
+    {
+        for (i = 1; i < array.length; i++) 
+        {
+                if (array[i] > i) 
+                    largestVal = array[i]; 
+            
+            console.log(largestVal);
+        }
+    }
+     
 // Reverse order of array, e.g. [1,2,3] → [3,2,1]
-function reverseArray(anArray) {
+console.log('Oefening 2');
+let anArray = [1,2,3,4];
+let numArray = anArray.length;
 
-}
+    function reverseArray(anArray) 
+    {
+        for (i = numArray.length-1; i >= 0; i--) 
+        {
+            console.log(anArray[i]);
+        }
+    }
 
 // Make a sum of all elements, e.g. [1,2,3] → 6
 function arraySum(anArray) {
