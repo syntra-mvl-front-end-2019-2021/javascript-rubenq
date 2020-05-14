@@ -1,50 +1,77 @@
 
 // Return the largest element of array (all elements will be numbers), e.g. [1,2,3] → 3
-console.log('Oefening 1');
-let array = [1,3,7,11,2];
-let largestVal;
+let largestVal = 0;
     function getLargestItemInArray(array) 
     {
-        for (i = 1; i < array.length; i++) 
+        for (let i = 0; i < array.length; i++) 
         {
-                if (array[i] > i) 
-                    largestVal = array[i]; 
-            
-            console.log(largestVal);
+            if (array[i] > largestVal) 
+            {
+                largestVal = array[i];
+            }     
         }
+        return largestVal;
     }
      
 // Reverse order of array, e.g. [1,2,3] → [3,2,1]
-console.log('Oefening 2');
-let anArray = [1,2,3,4];
-let numArray = anArray.length;
-
-    function reverseArray(anArray) 
+function reverseArray(anArray) 
+{
+    let revArray = [];
+    for (let i = anArray.length-1; i >= 0; i--) 
     {
-        for (i = numArray.length-1; i >= 0; i--) 
-        {
-            console.log(anArray[i]);
-        }
+        revArray.push(anArray[i]);
     }
+    return revArray;
+}
 
 // Make a sum of all elements, e.g. [1,2,3] → 6
-function arraySum(anArray) {
-
+function arraySum(anArray) 
+{
+    let sum = 0;
+    for (let i = anArray.length-1; i >= 0; i--)
+    { 
+        sum = sum + anArray[i];
+    }
+    return sum; 
 }
 
 // Make a string of the first letter of each element of array, e.g. ['Dog', 'cat', 'snake'] → 'Dcs'
-function stringOfFirstLetters(anArray) {
-
+function stringOfFirstLetters(anArray) 
+{
+    let firstLetters;
+        for (let i = 0; i < anArray.length; i ++) 
+        {
+            firstLetters = anArray[i].charAt(0);
+            return firstLetters[0];
+        }
 }
 
 // Combines two arrays by alternatingly taking elements, e.g. ['a','b','c'], [1,2,3] → ['a',1,'b',2,'c',3].
-function combineArrays(arrayOne, arrayTwo) {
-
-}
+function combineArrays(arrayOne, arrayTwo)
+{
+    let result = [];
+    let i = Math.min(arrayOne.length); 
+    let j = Math.min(arrayTwo.length);
+    
+    for (i = 0; i < j; i++) 
+        {
+            result.push(arrayOne[i], arrayTwo[i]);
+        }
+        result.push(...arrayOne.slice(j), ...arrayTwo.slice(j));
+        return result;
+} 
 
 // Takes a number and returns a list of its digits. e.g. 2342 → [2,3,4,2]
-function numberToDigitArray(aNumber) {
+function numberToDigitArray(aNumber) 
+{
+    let result = [];
+    let stringNumber = aNumber.toString();
 
+    for (let i = 0; i < stringNumber.length; i++) 
+        {
+            result.push(+stringNumber.charAt(i));
+        }
+        return result;
 }
 
 // Translates a text to Pig Latin.
@@ -54,9 +81,21 @@ function numberToDigitArray(aNumber) {
 // let aString = 'The quick brown fox';
 // console.log(aString);
 // console.log(aString.split(' '));
-
-function translateToPigLating(aString) {
-
+function translateToPigLating(aString) 
+{
+    var newStr = aString;
+    if (newStr.slice(0,1).match(/[aeiouAEIOU]/)) {
+      newStr = newStr + "way";
+    }
+    else {
+      var moveLetters = "";
+      while (newStr.slice(0,1).match(/[^aeiouAEIOU]/)) {
+        moveLetters += newStr.slice(0,1);
+        newStr = newStr.slice(1, newStr.length);
+      }
+      newStr = newStr + moveLetters + "ay";
+    }
+    return newStr;
 }
 
 // Converts English text to Morse code.
