@@ -1,77 +1,79 @@
-
 // Return the largest element of array (all elements will be numbers), e.g. [1,2,3] → 3
-let largestVal = 0;
-    function getLargestItemInArray(array) 
-    {
-        for (let i = 0; i < array.length; i++) 
-        {
-            if (array[i] > largestVal) 
-            {
-                largestVal = array[i];
-            }     
+function getLargestItemInArray(array) {
+    let largestVal = array[0];
+
+    for (let i = 1; i < array.length; i++) {
+        if (largestVal < array[i]) {
+            largestVal = array[i];
         }
-        return largestVal;
     }
-     
+
+    return largestVal;
+}
+
 // Reverse order of array, e.g. [1,2,3] → [3,2,1]
-function reverseArray(anArray) 
-{
-    let revArray = [];
-    for (let i = anArray.length-1; i >= 0; i--) 
-    {
-        revArray.push(anArray[i]);
+function reverseArray(anArray) {
+    let reversedArray = [];
+
+    for (let anArrayIndex in anArray) {
+        reversedArray.unshift(anArray[anArrayIndex]);
     }
-    return revArray;
+
+    return reversedArray;
 }
 
 // Make a sum of all elements, e.g. [1,2,3] → 6
-function arraySum(anArray) 
-{
-    let sum = 0;
-    for (let i = anArray.length-1; i >= 0; i--)
-    { 
-        sum = sum + anArray[i];
+function arraySum(anArray) {
+    let result = 0;
+
+    for (let anArrayIndex in anArray) {
+        result += anArray[anArrayIndex];
     }
-    return sum; 
+
+    return result;
 }
 
 // Make a string of the first letter of each element of array, e.g. ['Dog', 'cat', 'snake'] → 'Dcs'
-function stringOfFirstLetters(anArray) 
-{
-    let firstLetters;
-        for (let i = 0; i < anArray.length; i ++) 
-        {
-            firstLetters = anArray[i].charAt(0);
-            return firstLetters[0];
-        }
+function stringOfFirstLetters(anArray) {
+    let result = '';
+
+    for (let anArrayIndex in anArray) {
+        result += anArray[anArrayIndex].substr(0, 1);
+        // anArray[anArrayIndex][0]
+    }
+
+    return result;
 }
 
 // Combines two arrays by alternatingly taking elements, e.g. ['a','b','c'], [1,2,3] → ['a',1,'b',2,'c',3].
-function combineArrays(arrayOne, arrayTwo)
-{
+function combineArrays(arrayOne, arrayTwo) {
     let result = [];
-    let i = Math.min(arrayOne.length); 
-    let j = Math.min(arrayTwo.length);
-    
-    for (i = 0; i < j; i++) 
-        {
-            result.push(arrayOne[i], arrayTwo[i]);
+    let longestLength =
+        arrayOne.length > arrayTwo.length ? arrayOne.length : arrayTwo.length;
+
+    for (let i = 0; i < longestLength; i++) {
+        if (arrayOne[i] !== undefined) {
+            result.push(arrayOne[i]);
         }
-        result.push(...arrayOne.slice(j), ...arrayTwo.slice(j));
-        return result;
-} 
+
+        if (arrayTwo[i] !== undefined) {
+            result.push(arrayTwo[i]);
+        }
+    }
+
+    return result;
+}
 
 // Takes a number and returns a list of its digits. e.g. 2342 → [2,3,4,2]
-function numberToDigitArray(aNumber) 
-{
+function numberToDigitArray(aNumber) {
+    let digitStringArray = aNumber.toString().split(''); // ['2', '3', '4', '2']
     let result = [];
-    let stringNumber = aNumber.toString();
 
-    for (let i = 0; i < stringNumber.length; i++) 
-        {
-            result.push(+stringNumber.charAt(i));
-        }
-        return result;
+    for (let i in digitStringArray) {
+        result.push(parseInt(digitStringArray[i]));
+    }
+
+    return result;
 }
 
 // Translates a text to Pig Latin.
@@ -81,21 +83,29 @@ function numberToDigitArray(aNumber)
 // let aString = 'The quick brown fox';
 // console.log(aString);
 // console.log(aString.split(' '));
-function translateToPigLating(aString) 
-{
-    var newStr = aString;
-    if (newStr.slice(0,1).match(/[aeiouAEIOU]/)) {
-      newStr = newStr + "way";
+
+function translateToPigLating(aString) {
+    let wordArray = aString.split(' ');
+    let pigLtnArray = [];
+
+    for (let i in wordArray) {
+        let curWord = wordArray[i];
+        let curWordFirsLetter = curWord.substr(0, 1); // T
+        let curWordOtherLetters = curWord.substr(1); // he
+
+        if (curWordFirsLetter === curWordFirsLetter.toUpperCase()) {
+            curWordOtherLetters =
+                curWordOtherLetters.substr(0, 1).toUpperCase() +
+                curWordOtherLetters.substr(1); // He
+
+            curWordFirsLetter = curWordFirsLetter.toLowerCase(); // t
+        }
+
+        let pigLtnWord = curWordOtherLetters + curWordFirsLetter + 'ay'; // Hetay
+        pigLtnArray.push(pigLtnWord);
     }
-    else {
-      var moveLetters = "";
-      while (newStr.slice(0,1).match(/[^aeiouAEIOU]/)) {
-        moveLetters += newStr.slice(0,1);
-        newStr = newStr.slice(1, newStr.length);
-      }
-      newStr = newStr + moveLetters + "ay";
-    }
-    return newStr;
+
+    return pigLtnArray.join(' ');
 }
 
 // Converts English text to Morse code.
@@ -104,7 +114,7 @@ function translateToPigLating(aString)
 // if (iets = 'h') {
 // iets doen
 // } else if (iets = 'e') {
-    
+
 // }...
 
 // switch (iets) {
@@ -117,16 +127,136 @@ function translateToPigLating(aString)
 //         break;
 //     default:
 //         console.log('kweetnie');
-//         break;    
+//         break;
 // }
 
-function translateToMorse(aString) {
+function letterToMorse(letter) {
+    let morseLetter;
 
+    switch (letter.toLowerCase()) {
+        case 'a':
+            morseLetter = '*_';
+            break;
+        case 'b':
+            morseLetter = '_***';
+            break;
+        case 'c':
+            morseLetter = '_*_*';
+            break;
+        case 'd':
+            morseLetter = '_**';
+            break;
+        case 'e':
+            morseLetter = '*';
+            break;
+        case 'f':
+            morseLetter = '**_*';
+            break;
+        case 'g':
+            morseLetter = '__*';
+            break;
+        case 'h':
+            morseLetter = '****';
+            break;
+        case 'i':
+            morseLetter = '**';
+            break;
+        case 'j':
+            morseLetter = '*___';
+            break;
+        case 'k':
+            morseLetter = '_*_';
+            break;
+        case 'l':
+            morseLetter = '*_**';
+            break;
+        case 'm':
+            morseLetter = '__';
+            break;
+        case 'n':
+            morseLetter = '_*';
+            break;
+        case 'o':
+            morseLetter = '___';
+            break;
+        case 'p':
+            morseLetter = '*__*';
+            break;
+        case 'q':
+            morseLetter = '__*_';
+            break;
+        case 'r':
+            morseLetter = '*_*';
+            break;
+        case 's':
+            morseLetter = '***';
+            break;
+        case 't':
+            morseLetter = '_';
+            break;
+        case 'u':
+            morseLetter = '**_';
+            break;
+        case 'v':
+            morseLetter = '***_';
+            break;
+        case 'w':
+            morseLetter = '*__';
+            break;
+        case 'x':
+            morseLetter = '_**_';
+            break;
+        case 'y':
+            morseLetter = '_*__';
+            break;
+        case 'z':
+            morseLetter = '__**';
+            break;
+    }
+
+    return morseLetter;
+}
+
+function translateToMorse(aString) {
+    let aStringArray = aString.split('');
+    let resultArray = [];
+
+    for (let i in aStringArray) {
+        let curLetter = aStringArray[i];
+
+        if (curLetter === ' ') {
+            resultArray.push(' ');
+        } else {
+            resultArray.push(letterToMorse(curLetter) + '|');
+        }
+    }
+
+    return resultArray.join('');
 }
 
 // Write a more advanced version of the previous function
 // Where the unnecessary | is omitted
 // e.g. 'Hello World' → '****|*|*_**|*_**|___ *__|___|*_*|*_**|_**'\
 function translateToMorseFancy(aString) {
+    let aStringArray = aString.split(' ');
+    let resultArray = [];
 
+    for (let i in aStringArray) {
+        let curWordArray = aStringArray[i].split('');
+
+        for (let j in curWordArray) {
+            let curLetter = curWordArray[j];
+            resultArray.push(letterToMorse(curLetter));
+
+            if (j < curWordArray.length - 1) {
+                resultArray.push('|');
+            }
+        }
+
+        if (i < aStringArray.length - 1) {
+            resultArray.push(' ');
+        }
+    }
+
+    return resultArray.join('');
 }
