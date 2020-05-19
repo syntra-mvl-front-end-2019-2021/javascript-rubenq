@@ -17,7 +17,6 @@ function wordCount(sentence, word)
     return result;
 }
 
-
 // Calculate scrabbleScore of a word
 // See letter values here: https://www.playmeo.com/face-value-scrabble-tiles/
 // letterMultipliers, an array of objects like this:
@@ -31,7 +30,24 @@ function scrabbleScoreCalculator(word, letterMultipliers, wordMultiplier) {}
 // Determine if a sentence is a pangram
 // https://en.wikipedia.org/wiki/Pangram
 // e.g. 'The quick brown fox jumps over the lazy dog' → true
-function isPangram(sentence) {}
+function isPangram(sentence) 
+{
+    let alphabet = "abcdefghijklmnopqrstuvwxyz";
+    let regex = /\s/g; //'https://regexr.com/'   ==> 'Regular Expressions' staan altijd tussen '/ /'. 'g' = 'global', dus over de gehele 'sentence'. '/s' = 'spaties'
+                       // Zie ook youtube 'https://www.youtube.com/watch?v=909NfO1St0A'
+    let lowercase = sentence.toLowerCase().replace(regex, ""); // '.replace' vervangt alle spaties in 'sentence' naar 'geen spatie' (dus alles hangt aan elkaar)
+   
+    for (let i = 0; i < alphabet.length; i++)
+        {
+            if (lowercase.indexOf(alphabet[i]) === -1)
+                {
+                return false;
+                }
+        }
+   
+   return true;
+    
+}
 
 // Given a word and a list of possible anagrams,
 // return an array with all the correct anagrams.
