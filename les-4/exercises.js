@@ -1,6 +1,22 @@
 // Count the number of occurrences of a word in a sentence in,
 // e.g. 'Ik heb honger, heb jij ook honger.', 'heb' → 2
-function wordCount(sentence, word) {}
+function wordCount(sentence, word) 
+{
+    let result = 0;
+    let lowerCaseSentence = sentence.toLowerCase();
+    let lowerCaseWord = word.toLowerCase();
+    let aString = lowerCaseSentence.split(' ');
+
+    for (let i = 0; i < aString.length; i++)
+    {
+        if (aString[i] === lowerCaseWord)
+        {
+            result++;
+        }
+    }
+    return result;
+}
+
 
 // Calculate scrabbleScore of a word
 // See letter values here: https://www.playmeo.com/face-value-scrabble-tiles/
