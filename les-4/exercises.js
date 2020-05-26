@@ -35,10 +35,22 @@ function wordCount(sentence, word)
 // 'hello', [{index: 2, multiplier: 2}], 1
 function scrabbleScoreCalculator(word, letterMultipliers, wordMultiplier) 
 {
-    // let lettersOfWord = word.split('');
-    // let multipliersKeys = Object.keys(letterMultipliers);
-    // console.log(multipliersKeys[0]);
-    // console.log(lettersOfWord);
+    let lettersOfWord = word.split('');
+    let multipliersKeys = Object.keys(letterMultipliers);
+    let onePoint = 'aeioulnstr';
+    let twoPoints = 'dg';
+    let threePoints = 'bcmp';
+    let fourPoints = 'fhvwy';
+    let fivePoints = 'k';
+    let sixPoints = 'jx';
+    let tenPoints = 'qz';
+    let score = 0;
+    console.log('KEYS');
+    console.log(multipliersKeys[0]);
+    console.log('LETTERS OF WORD');
+    console.log(lettersOfWord);
+
+
 }
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
