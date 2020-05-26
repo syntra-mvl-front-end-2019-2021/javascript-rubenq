@@ -83,8 +83,7 @@ function findAnagrams(word, possibleAnagrams)
     {
         lettersOfAnagrams[i] = possibleAnagrams[i].toLowerCase().replace(regex, "").split('').sort().join('');
     }
-
-       for (let i = 0; i <= lettersOfAnagrams.length; i++)
+        for (let i in lettersOfAnagrams)
        {
             if (lettersOfAnagrams[i] === lettersOfWord)
             {
