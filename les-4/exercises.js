@@ -66,7 +66,7 @@ function isPangram(sentence)
 }
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Oefening 4 NOK
+// Oefening 4 OK
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // Given a word and a list of possible anagrams,
@@ -74,20 +74,14 @@ function isPangram(sentence)
 // e.g. 'master', ['stream', 'pigeon', 'maters'] → ['stream', 'maters']
 function findAnagrams(word, possibleAnagrams) 
 {
-    lettersOfWord = word.split('').sort().join('').toLowerCase();
-    lettersOfAnagrams = [];
+    let regex = /\s/g;
+    let lettersOfWord = word.toLowerCase().split('').sort().join('').replace(regex, "");
+    let lettersOfAnagrams = [];
     result = [];
-    console.log('WORD');
-    console.log(word);
-    console.log('LETTERS OF WORD');
-    console.log(lettersOfWord);
+   
     for (let i in possibleAnagrams)
     {
-        lettersOfAnagrams[i] = possibleAnagrams[i].split('').sort().join('').toLowerCase();
-        console.log('ANAGRAM ' + i);
-        console.log(possibleAnagrams[i]);
-        console.log('LETTERS OF ANAGRAM ' + i);
-        console.log(lettersOfAnagrams[i]);
+        lettersOfAnagrams[i] = possibleAnagrams[i].toLowerCase().replace(regex, "").split('').sort().join('');
     }
 
        for (let i = 0; i <= lettersOfAnagrams.length; i++)
@@ -95,9 +89,7 @@ function findAnagrams(word, possibleAnagrams)
             if (lettersOfAnagrams[i] === lettersOfWord)
             {
                 result.push(possibleAnagrams[i]);
-                // return result;
-                console.log('RESULT');
-                console.log(result);
             }
        }
+    return result;
 }
