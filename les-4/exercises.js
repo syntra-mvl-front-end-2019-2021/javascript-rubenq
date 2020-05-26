@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Oefening 1
+// Oefening 1 OK
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // Count the number of occurrences of a word in a sentence in,
@@ -22,7 +22,7 @@ function wordCount(sentence, word)
 }
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Oefening 2
+// Oefening 2 NOK
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // Calculate scrabbleScore of a word
@@ -42,7 +42,7 @@ function scrabbleScoreCalculator(word, letterMultipliers, wordMultiplier)
 }
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Oefening 3
+// Oefening 3 OK
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // Determine if a sentence is a pangram
@@ -66,7 +66,7 @@ function isPangram(sentence)
 }
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Oefening 4
+// Oefening 4 NOK
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // Given a word and a list of possible anagrams,
@@ -74,23 +74,30 @@ function isPangram(sentence)
 // e.g. 'master', ['stream', 'pigeon', 'maters'] → ['stream', 'maters']
 function findAnagrams(word, possibleAnagrams) 
 {
-    lettersOfWord = word.split('');
+    lettersOfWord = word.split('').sort().join('').toLowerCase();
     lettersOfAnagrams = [];
     result = [];
-
+    console.log('WORD');
+    console.log(word);
+    console.log('LETTERS OF WORD');
+    console.log(lettersOfWord);
     for (let i in possibleAnagrams)
     {
-        lettersOfAnagrams[i] = possibleAnagrams[i].split('');
-        // console.log(lettersOfAnagrams[i]);
+        lettersOfAnagrams[i] = possibleAnagrams[i].split('').sort().join('').toLowerCase();
+        console.log('ANAGRAM ' + i);
+        console.log(possibleAnagrams[i]);
+        console.log('LETTERS OF ANAGRAM ' + i);
+        console.log(lettersOfAnagrams[i]);
+    }
 
-       for (let j = 0; j <= lettersOfAnagrams.length; j++)
+       for (let i = 0; i <= lettersOfAnagrams.length; i++)
        {
-            if (lettersOfAnagrams[j] !== lettersOfWord)
+            if (lettersOfAnagrams[i] === lettersOfWord)
             {
-                result.push(lettersOfAnagrams[j]);
-                return result;
-                // console.log(result);
+                result.push(possibleAnagrams[i]);
+                // return result;
+                console.log('RESULT');
+                console.log(result);
             }
        }
-    }
 }
