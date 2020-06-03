@@ -37,14 +37,13 @@ function addInput(event)
     position.innerHTML += '<div class="field has-addons number-input-group"><div class="control"><input id="input2" class="input number-input" type="number" step="1" value="0"></div><div class="control"><a class="button is-danger delete-number-input">X</a></div></div>'
     number.innerHTML ++;
 }
-
 addBtn.addEventListener('click', addInput);
 
 // Function to remove a field from the calculator.
 function removeInput(event)
 {
     let parent = document.getElementById('input-container');
-    let child = document.getElementsByTagName('field')[-1];
+    let child = document.getElementsByClassName('field')[-1];
     parent.removeChild(child);
 }
 
