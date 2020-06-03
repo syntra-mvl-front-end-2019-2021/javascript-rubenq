@@ -1,6 +1,7 @@
 let sumBtn = document.getElementById('sum-submit-btn');
 let productBtn = document.getElementById('product-submit-btn');
 let addBtn = document.getElementById('add-input-btn');
+let remBtn = document.getElementById('delete-number-input');
 
 // function for click event when button "calculate sum" is pushed.
 function sumClick(event) 
@@ -30,9 +31,21 @@ productBtn.addEventListener('click', prodClick);
 function addInput(event)
 {
     let extraInput = document.createElement('div');
-    let position = document.getElementsByClassName('field');
+    let position = document.getElementById('input-container');
+    let number = document.getElementById('number-count-container');
     position.appendChild(extraInput);
-    position.innerHTML += '<div class="control"><input id="input2" class="input number-input" type="number" step="1" value="0"></div><div class="control"><a class="button is-danger delete-number-input">X</a></div>'
+    position.innerHTML += '<div class="field has-addons number-input-group"><div class="control"><input id="input2" class="input number-input" type="number" step="1" value="0"></div><div class="control"><a class="button is-danger delete-number-input">X</a></div></div>'
+    number.innerHTML ++;
 }
 
 addBtn.addEventListener('click', addInput);
+
+// Function to remove a field from the calculator.
+function removeInput(event)
+{
+    let parent = document.getElementById('input-container');
+    let child = document.getElementsByTagName('field')[-1];
+    parent.removeChild(child);
+}
+
+remBtn.addEventListener('click', removeInput);
