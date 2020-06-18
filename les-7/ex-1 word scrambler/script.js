@@ -6,11 +6,10 @@ function splitSentence (event)
     let result = document.getElementById('result-container');
     let lettersArray = sentence.split('');
     let sentenceArray = sentence.split(' ');
-    let randomWords = Math.floor(Math.random() * sentenceArray.length);
     let numberOfWords = document.getElementById('word-count');
     let numberOfLetters = document.getElementById('letter-count');
     
-    // Durstenfeld shuffle
+    // Durstenfeld shuffle as found on the innerwebs...
     for (var i = sentenceArray.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * sentenceArray.length);
         var temp = sentenceArray[i];
