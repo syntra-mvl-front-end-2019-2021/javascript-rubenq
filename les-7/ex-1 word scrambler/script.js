@@ -1,9 +1,3 @@
-// const wordArray = ['bla', 'bla2', 'bla3', 'bla4'];
-// const randomIndex = Math.floor(Math.random() * wordArray.length);
-
-// console.log(wordArray[randomIndex]);
-
-
 let submitBtn = document.getElementById('submit-btn')
 
 function splitSentence (event)
@@ -16,10 +10,17 @@ function splitSentence (event)
     let numberOfWords = document.getElementById('word-count');
     let numberOfLetters = document.getElementById('letter-count');
     
-    result.innerHTML = sentenceArray[randomWords];
+    // Durstenfeld shuffle
+    for (var i = sentenceArray.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * sentenceArray.length);
+        var temp = sentenceArray[i];
+        sentenceArray[i] = sentenceArray[j];
+        sentenceArray[j] = temp;
+    }
+
+    result.innerHTML = sentenceArray.join(' ');
     numberOfWords.innerHTML = sentenceArray.length;
     numberOfLetters.innerHTML = lettersArray.length;
-    console.log(sentenceArray[randomWords]);
 }
 
 submitBtn.addEventListener('click', splitSentence);
