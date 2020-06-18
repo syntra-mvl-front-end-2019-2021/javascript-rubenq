@@ -4,14 +4,29 @@ let addBtn = document.getElementById('add-input-btn');
 let remBtn = document.getElementById('delete-number-input');
 
 // function for click event when button "calculate sum" is pushed.
-function sumClick(event) 
-{
-    let resultSum = document.getElementById('sum-result-container');
+// function sumClick(event) 
+// {
+//     let resultSum = document.getElementById('sum-result-container');
+//     let sumResult = 0;
+//     let input1 = parseInt(document.getElementById('input1').value);
+//     let input2 = parseInt(document.getElementById('input2').value);    
+//     sumResult = input1 + input2;
+//     resultSum.innerText = sumResult;  
+// }
+
+function sumClick(event) {
     let sumResult = 0;
-    let input1 = parseInt(document.getElementById('input1').value);
-    let input2 = parseInt(document.getElementById('input2').value);    
-    sumResult = input1 + input2;
-    resultSum.innerText = sumResult;  
+    let resultSum = parseInt(document.getElementsByClassName('number-input'));
+
+    for (let i = 0; i <= resultSum.length;i++) 
+    {
+        sumResult += resultSum[i];
+        console.log(resultSum);
+    }
+
+    // return result;
+    // console.log(parseInt(resultSum[i]));
+    resultSum.innerText = sumResult;
 }
 sumBtn.addEventListener('click', sumClick);
 
