@@ -1,0 +1,60 @@
+HANGMAN
+-------
+
+* Begin en Setup van het spel.
+------------------------------
+
+-> Wanneer de pagina laadt -> initGame.
+-> Wanneer er op de resetButton wordt geklikt -> initGame.
+        
+        -> initGame =   word -> randomWord wordt gekozen.
+                        hangman -> De 'hangman' foto's wordt op 1 gezet.
+                        turn -> De beurt wordt op 1 gezet.
+                        lettersFound -> De gevonden letters wordt op 0 gezet.
+                        won -> Deze status wordt op FALSE gezet.
+                        lost -> Deze status wordt op FALSE gezet.
+
+FRONTEND.
+---------
+-> Reset alle 'letters' -> haal classnames 'failed' en 'success' uit de attributen van de 'letters'.
+-> Reset de 'hangman' foto en plaats de eerste foto.
+-> Reset 'antwoordveld' -> plaats aantal underscores in functie van het 'randomWord'.
+-> Verwijder 'resultaatveld'.
+
+
+* Het eigenlijke spelverloop.
+-----------------------------
+
+Wanneer er in 'frontend' op een 'letter' geklikt wordt : 
+    -> Kijk of de 'letter' voorkomt in 'randomWord'.
+        -> JA : - Zet bij de desbetreffende 'letter' de classname 'success'.
+                - Vervang de underscore (frontend) in het 'antwoordveld' naar de gekozen 'letter' op de correcte plaats.
+                - Maak de 'letter' non-clickable.
+                - INITGAME :    - lettersFound +1
+                                - turn +1
+
+        -> NEE: - Zet bij de desbetreffende 'letter' de classname 'failed'.
+                - Vervang de hangman image naar de volgende image.
+                - INITGAME :    - hangman +1
+                                - turn +1
+
+    -> Vergelijk 'lettersFound' met de lengte van 'word'.
+        -> Wanneer 'lettersFound' = 'word'
+            -> INITGAME :   - 'won' = TRUE
+
+    -> Wanneer INITGAME 'hangman' = 9
+        -> INITGAME :   - 'lost' = TRUE
+
+
+* Het eindresultaat.
+--------------------
+
+-> Wanneer 'won'  = TRUE
+    -> 'resultaatveld' op frontend zetten
+        -> 'Gewonnen!' + 'turn'
+        -> Zet resetbutton onder het 'resultaatveld'
+
+-> Wanneer 'lost' = TRUE
+    -> 'resultaatveld' op frontend zetten
+        -> 'Verloren!' + 'word' + 'turn'
+        -> Zet resetbutton onder het 'resultaatveld'      
