@@ -1,4 +1,4 @@
-let submitBtn = document.getElementById('submit-btn')
+let submitBtn = document.getElementById('submit-btn');
 
 function splitSentence (event)
 {
