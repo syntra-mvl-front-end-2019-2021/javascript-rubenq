@@ -88,9 +88,9 @@ const randomWords = [
     // Set 'winOrLoseContainer' to empty.
     winOrLoseContainer.innerHTML = '';
   }
- 
   
-  function checkLetter(event){
+  function chosenLetter(event)
+  {
     let randomWord = gameState.word.split('');
     console.log(randomWord);
 
@@ -100,6 +100,13 @@ const randomWords = [
         return clickedLetter;
       }
       
+    checkLetter();
+  }    
+
+  letterContainer.addEventListener('click', chosenLetter, false);
+
+  function checkLetter()
+  {  
     for (i = 0; i > randomWord.length; i--)
     {
       if (randomWord[i] == clickedLetter)
@@ -109,20 +116,15 @@ const randomWords = [
         }
         else 
         {
+          letter[i].setAttribute('class', 'letter failed');
           gameState.turn++;
+          
+          
         }
-        console.log(clickedLetter);
-    }
-      
-      
-      console.log(gameState.word);
-      console.log(gameState);
-      
-      
-    // winOrLose();
-    }
-  
-  letterContainer.addEventListener('click', checkLetter, false);
+        console.log(gameState);
+    }     
+  winOrLose();
+  } 
 
   function winOrLose()
   {
