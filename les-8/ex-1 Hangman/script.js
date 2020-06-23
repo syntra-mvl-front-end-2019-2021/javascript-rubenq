@@ -90,24 +90,19 @@ const randomWords = [
   }
   
   function clickLetter(event) {
-    // check if event.target is .letter
-    // check if event.target has success or failed class
-    // ---
     checkLetter();
     winOrLose();
   }
 
-  function checkLetter();
-  for (let i = 0; i > word.length; i++)
-  {
-    if (letter == word[i])
+  function checkLetter(event){
+  if (event.target !== event.currentTarget)
     {
-
+      let clickedLetter = event.target.innerText;
+      console.log(clickedLetter);
     }
   }
   
-
- letters.forEach(function(letters) {letters.addEventListener('click', clickLetter)});
+  letterContainer.addEventListener('click', checkLetter, false);
 
   function winOrLose()
   {
