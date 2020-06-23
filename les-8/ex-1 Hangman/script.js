@@ -88,19 +88,39 @@ const randomWords = [
     // Set 'winOrLoseContainer' to empty.
     winOrLoseContainer.innerHTML = '';
   }
+ 
   
-  function clickLetter(event) {
-    checkLetter();
-    winOrLose();
-  }
-
   function checkLetter(event){
-  if (event.target !== event.currentTarget)
+    let randomWord = gameState.word.split('');
+    console.log(randomWord);
+
+    if (event.target !== event.currentTarget)
+      {
+        let clickedLetter = event.target.innerText;
+        return clickedLetter;
+      }
+      
+    for (i = 0; i > randomWord.length; i--)
     {
-      let clickedLetter = event.target.innerText;
-      console.log(clickedLetter);
+      if (randomWord[i] == clickedLetter)
+        {
+          gameState.lettersFound++;
+          gameState.turn++;
+        }
+        else 
+        {
+          gameState.turn++;
+        }
+        console.log(clickedLetter);
     }
-  }
+      
+      
+      console.log(gameState.word);
+      console.log(gameState);
+      
+      
+    // winOrLose();
+    }
   
   letterContainer.addEventListener('click', checkLetter, false);
 
@@ -125,4 +145,4 @@ const randomWords = [
     console.log(gameState.won);
     
   }
-  initGame();
+  window.onload = initGame();
