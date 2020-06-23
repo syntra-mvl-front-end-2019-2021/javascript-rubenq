@@ -26,6 +26,9 @@ FRONTEND.
 -----------------------------
 
 Wanneer er in 'frontend' op een 'letter' geklikt wordt : 
+
+-> Check of letter de class success of failed heeft.
+
     -> Kijk of de 'letter' voorkomt in 'randomWord'.
         -> JA : - Zet bij de desbetreffende 'letter' de classname 'success'.
                 - Vervang de underscore (frontend) in het 'antwoordveld' naar de gekozen 'letter' op de correcte plaats.
