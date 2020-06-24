@@ -46,6 +46,13 @@ const gameState =
 
   // -----------------------------------------------------------------
 
+  function updateHangmanPicture(hangman) 
+  {
+    document.getElementById('image').src = 'images/hangman0' + hangman + '.png';
+  }
+
+  // -----------------------------------------------------------------
+
   function setSolutionContainer()
   {
     for (let i = gameState.word.length; i > 0; i--)
@@ -78,19 +85,18 @@ const gameState =
 
   function compareLetter(clickedLetter,randomWord)
   {  
-    let found = gameState.lettersFound;
-    console.log(clickedLetter);
     if (randomWord.indexOf(clickedLetter) >= 0) 
     {
       gameState.turn++;
-      found++;
-      winOrLose(found);
+      gameState.lettersFound++;
+      winOrLose();
     } 
     if (randomWord.indexOf(clickedLetter) === -1) 
     {
       gameState.turn++;
-      gameState.lettersFound++;
-      winOrLose(found);
+      let hangman = gameState.hangman++;
+      updateHangmanPicture(hangman);
+      winOrLose();
     }
   console.log(clickedLetter);
   console.log(gameState); 
