@@ -15,6 +15,12 @@ const gameState =
   lost: false,
 };
 
+// let turn = gameState['turn'];
+// let lettersFound = gameState['lettersFound'];
+// let hangman = gameState['hangman'];
+// let won = gameState['won'];
+// let lost = gameState['lost'];
+
   // -----------------------------------------------------------------
   
   function initGameState() 
@@ -55,6 +61,7 @@ const gameState =
 
   function setSolutionContainer()
   {
+
     for (let i = gameState.word.length; i > 0; i--)
     {
       solutionContainer.innerHTML += '<div class="solution-letter"></div>';
@@ -76,7 +83,7 @@ const gameState =
   
     if (event.target !== event.currentTarget)
       {
-        let clickedLetter = event.target.innerText;
+        let clickedLetter = event.target.innerText.toLowerCase();
         compareLetter(clickedLetter, randomWord);
       }
   }    
@@ -87,42 +94,39 @@ const gameState =
   {  
     if (randomWord.indexOf(clickedLetter) >= 0) 
     {
+      // letter[clickedLetter].setAttribute('class', 'letter success');
+      // console.log(letter);
       gameState.turn++;
       gameState.lettersFound++;
-      winOrLose();
+      winOrLose(randomWord,gameState.lettersFound);
     } 
-    if (randomWord.indexOf(clickedLetter) === -1) 
+    else if (randomWord.indexOf(clickedLetter) === -1) 
     {
       gameState.turn++;
-      let hangman = gameState.hangman++;
-      updateHangmanPicture(hangman);
-      winOrLose();
+      gameState.hangman++;
+      updateHangmanPicture(gameState.hangman);
+      winOrLose(hangman);
     }
   console.log(clickedLetter);
-  console.log(gameState); 
+  console.log(lettersFound); 
   console.log(randomWord);
+  console.log(gameState);
+  
   } 
 
   // ------------------------------------------------------------------
 
-  function winOrLose(found)
+  function winOrLose(randomWord, gameState.lettersFound, hangman)
   {
-    if (found === gameState.word.length)
+    if (gameState.lettersFound === randomWord.length)
       {
-        gameState.won = true;
+        winOrLoseContainer.innerHTML = 'Je hebt gewonnen!';
       }
-      else
+    else if (hangman === 10)
         {
-          gameState.won = false;
+          winOrLoseContainer.innerHTML = 'Je hebt verloren! Het woord die we zochten was '+ randomWord;
         }
-    if (gameState.hangman === 9)
-        {
-          gameState.lost = true;
-        }
-      else
-        {
-          gameState.lost = false;
-        }
+        console.log(hangman);
   }
 
   // -------------------------------------------------------------------
