@@ -1,134 +1,107 @@
-const randomWords = [
-    'condition',
-    'bottom',
-    'lineage',
-    'trip',
-    'reporter',
-    'paper',
-    'colorful',
-    'agent',
-    'justify',
-    'torture',
-    'cap',
-    'earthflax',
-    'payment',
-    'research',
-    'picture',
-    'garage',
-    'honor',
-    'memorial',
-    'planet',
-    'biography',
-    'profound',
-    'rumor',
-    'gear',
-    'bedroom',
-    'orthodox',
-    'penalty',
-    'grief',
-    'promote',
-    'roof',
-    'suite',
-    'moving',
-    'killer',
-    'museum',
-    'essay',
-    'fever',
-    'dignity',
-    'shadow',
-    'enjoy',
-    'kill',
-    'shy',
-    'counter',
-    'pawn',
-    'button',
-    'bullet',
-    'skin',
-    'rate',
-    'shop',
-    'consider',
-    'other',
-    'prospect',
-  ];
-  const hangManImage = document.querySelector('#image');
-  let solutionContainer = document.querySelector('#solution-container');
-  const winOrLoseContainer = document.querySelector('#win-lose-container');
-  const letterContainer = document.querySelector('#letter-container');
-  const letters = document.getElementsByClassName('letter');
-  const gameState = {
-    word: [],
-    hangman: 1,
-    turn: 1,
-    lettersFound: 0,
-    won: false,
-    lost: false,
-  };
+const randomWords = ['condition','bottom','lineage','trip','reporter','paper','colorful','agent','justify','torture','cap','earthflax','payment','research','picture','garage','honor','memorial','planet','biography','profound','rumor','gear','bedroom','orthodox','penalty','grief','promote','roof','suite','moving','killer','museum','essay','fever','dignity','shadow','enjoy','kill','shy','counter','pawn','button','bullet','skin','rate','shop','consider','other','prospect',];
+const hangManImage = document.querySelector('#image');
+let solutionContainer = document.querySelector('#solution-container');
+const winOrLoseContainer = document.querySelector('#win-lose-container');
+const letterContainer = document.querySelector('#letter-container');
+const letters = document.getElementsByClassName('letter');
+let letter = letterContainer.children;
+const gameState = 
+{
+  word: [],
+  hangman: 1,
+  turn: 0,
+  lettersFound: 0,
+  won: false,
+  lost: false,
+};
+
+  // -----------------------------------------------------------------
   
-  function initGame() 
+  function initGameState() 
   {
-    let letter = letterContainer.children;
     gameState.word = randomWords[Math.floor(Math.random() * randomWords.length)];
     gameState.hangman = 1;
-    gameState.turn = 1;
+    gameState.turn = 0;
     gameState.lettersFound = 0;
     gameState.won = false;
     gameState.lost = false;
-    // Set class to 'letter' for children inside 'letter-container'.
-      for (let i = 0; i < letter.length; i++)
-      {
-        letter[i].setAttribute('class', 'letter');
-      }
-    // Set 'hangManImage' to 'hangman01.png'.
+  }
+
+  // -----------------------------------------------------------------
+
+  function setClassForLetters()
+  {
+    for (let i = 0; i < letter.length; i++)
+    {
+      letter[i].setAttribute('class', 'letter');
+    }
+  }
+
+  // -----------------------------------------------------------------
+
+  function setHangmanPicture()
+  {  
     hangManImage.setAttribute('src', 'images/hangman01.png');
-    // Set 'solutionContainer' to equal letters of randomWord.
-      for (let i = gameState.word.length; i > 0; i--)
-      {
-        solutionContainer.innerHTML += '<div class="solution-letter"></div>';
-      }
-    // Set 'winOrLoseContainer' to empty.
+  } 
+
+  // -----------------------------------------------------------------
+
+  function setSolutionContainer()
+  {
+    for (let i = gameState.word.length; i > 0; i--)
+    {
+      solutionContainer.innerHTML += '<div class="solution-letter"></div>';
+    }
+  }    
+  
+  // -----------------------------------------------------------------
+
+  function setWinOrLoseContainer()
+  {
     winOrLoseContainer.innerHTML = '';
   }
   
-  function chosenLetter(event)
+  // ------------------------------------------------------------------
+
+  function chooseLetter(event)
   {
     let randomWord = gameState.word.split('');
-    console.log(randomWord);
-
+  
     if (event.target !== event.currentTarget)
       {
         let clickedLetter = event.target.innerText;
-        return clickedLetter;
+        compareLetter(clickedLetter, randomWord);
       }
-      
-    checkLetter();
   }    
+ 
+  // ------------------------------------------------------------------
 
-  letterContainer.addEventListener('click', chosenLetter, false);
-
-  function checkLetter()
+  function compareLetter(clickedLetter,randomWord)
   {  
-    for (i = 0; i > randomWord.length; i--)
+    let found = gameState.lettersFound;
+    console.log(clickedLetter);
+    if (randomWord.indexOf(clickedLetter) >= 0) 
     {
-      if (randomWord[i] == clickedLetter)
-        {
-          gameState.lettersFound++;
-          gameState.turn++;
-        }
-        else 
-        {
-          letter[i].setAttribute('class', 'letter failed');
-          gameState.turn++;
-          
-          
-        }
-        console.log(gameState);
-    }     
-  winOrLose();
+      gameState.turn++;
+      found++;
+      winOrLose(found);
+    } 
+    if (randomWord.indexOf(clickedLetter) === -1) 
+    {
+      gameState.turn++;
+      gameState.lettersFound++;
+      winOrLose(found);
+    }
+  console.log(clickedLetter);
+  console.log(gameState); 
+  console.log(randomWord);
   } 
 
-  function winOrLose()
+  // ------------------------------------------------------------------
+
+  function winOrLose(found)
   {
-    if (gameState.lettersFound === gameState.word.length)
+    if (found === gameState.word.length)
       {
         gameState.won = true;
       }
@@ -144,7 +117,12 @@ const randomWords = [
         {
           gameState.lost = false;
         }
-    console.log(gameState.won);
-    
   }
-  window.onload = initGame();
+
+  // -------------------------------------------------------------------
+  
+  window.onload = initGameState(),setClassForLetters(),setHangmanPicture(),setSolutionContainer(),setWinOrLoseContainer();
+  letterContainer.addEventListener('click', chooseLetter);
+
+ 
+  
