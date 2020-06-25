@@ -98,14 +98,14 @@ const gameState =
       // console.log(letter);
       gameState.turn++;
       gameState.lettersFound++;
-      winOrLose(randomWord,gameState.lettersFound);
+      winOrLose(randomWord);
     } 
     else if (randomWord.indexOf(clickedLetter) === -1) 
     {
       gameState.turn++;
       gameState.hangman++;
       updateHangmanPicture(gameState.hangman);
-      winOrLose(hangman);
+      winOrLose();
     }
   console.log(clickedLetter);
   console.log(lettersFound); 
@@ -116,15 +116,17 @@ const gameState =
 
   // ------------------------------------------------------------------
 
-  function winOrLose(randomWord, gameState.lettersFound, hangman)
+  function winOrLose(randomWord)
   {
-    if (gameState.lettersFound === randomWord.length)
+    let lettersFound = gameState.lettersFound;
+    let hangman = gameState.hangman;
+    if (lettersFound === randomWord.length)
       {
         winOrLoseContainer.innerHTML = 'Je hebt gewonnen!';
       }
     else if (hangman === 10)
         {
-          winOrLoseContainer.innerHTML = 'Je hebt verloren! Het woord die we zochten was '+ randomWord;
+          winOrLoseContainer.innerHTML = 'Je hebt verloren! Het woord dat we zochten was '+ randomWord;
         }
         console.log(hangman);
   }
