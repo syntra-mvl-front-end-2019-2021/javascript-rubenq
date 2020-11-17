@@ -23,11 +23,12 @@ function changeImg(){
 
 const img1 = "images/image1.jpg";
 const img2 = "images/image2.jpg";
+const images = document.querySelectorAll('.images');
         
         let promise1 = new Promise((resolve, reject)=>{
             let img = document.createElement('img');
-
             img.addEventListener('load', (ev) => {
+                console.log(img);
                     resolve(img);
                 });
             img.addEventListener('error', (err) => {
@@ -39,8 +40,9 @@ const img2 = "images/image2.jpg";
         
         let promise2 = new Promise((resolve, reject)=>{
             let img = document.createElement('img');
-
             img.addEventListener('load', (ev) => {
+               
+                console.log(img);
                     resolve(img);
                 });
             img.addEventListener('error', (err) => {
@@ -51,6 +53,7 @@ const img2 = "images/image2.jpg";
         });
         
         Promise.all([promise1, promise2]).then((array)=>{
+            
             console.log('Both images are loaded');
         })
         .catch((err)=>{
