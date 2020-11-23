@@ -27,11 +27,6 @@ function getShownItems() {
 function nextSlide(event) {
   const shownItems = getShownItems();
 
-  if (sliderInfo.currentSlide === sliderContainer.children.length - shownItems) { //sliderInfo.sliderItemCount
-    nextBtn.classList.add('hide');
-    return;
-  }
-
   if (
     sliderInfo.currentSlide === sliderContainer.children.length - (shownItems + 1)
   ) {
