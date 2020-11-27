@@ -3,36 +3,25 @@ const $container = document.getElementById('container');
 
 //GET SELECTION
 function getCurrency(){
-    let currency = document.getElementById('currency');
-    let date = document.getElementById('date');
-    currency.addEventListener('change', () => 
-        {
-            let selectedCurrency = currency.options[currency.selectedIndex].value;   
-    date.addEventListener('change', () => 
-        {
-            let selectedDate = date.options[date.selectedIndex].value;
-            fetchCurrency(selectedCurrency, selectedDate);
-            
-        });
-    });        
+    currency.addEventListener('change', useSelection);
+    date.addEventListener('change', useSelection);
 }
 
-//RESET VALUES
-function resetValues(selectedCurrency, selectedDate) {
-    if (selectedCurrency !== '' && selectedDate !== ''){
-        selectedDate = '';
-        selectedCurrency = '';
-    }else {
-        fetchCurrency(selectedCurrency, selectedDate);
-    }
+//GET SELECTION
+function useSelection() {
+    let selectedCurrency = currency.options[currency.selectedIndex].value;   
+    let selectedDate = date.options[date.selectedIndex].value;
+    fetchCurrency(selectedCurrency, selectedDate);
 }
 
 //FETCH SELECTION
 function fetchCurrency(selectedCurrency, selectedDate){
-    
-    console.log(selectedCurrency, selectedDate);
+    if (!selectedCurrency || !selectedDate) {
+        return;
+    }
     fetch(baseUrl + selectedDate + '?base=' + selectedCurrency, {method: 'GET'})
         .then(function(response) {
+            
             if (!response.ok) {
                 throw new Error('Fetch failed');
             }
@@ -50,6 +39,7 @@ function fetchCurrency(selectedCurrency, selectedDate){
 //WRITE LAYOUT
 function writeExchangeRate(rates) 
     {
+        $container.innerHTML = '';
         const $dateTag = document.createElement('p');
         $dateTag.textContent = rates.date;
     
