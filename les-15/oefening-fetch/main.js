@@ -7,7 +7,7 @@ function getCurrency(){
     date.addEventListener('change', useSelection);
 }
 
-//GET SELECTION
+//USE SELECTION
 function useSelection() {
     let selectedCurrency = currency.options[currency.selectedIndex].value;   
     let selectedDate = date.options[date.selectedIndex].value;
@@ -53,8 +53,6 @@ function writeExchangeRate(rates)
                 $liTag.textContent = key + ': ' + rates.rates[key];
                 $ulTag.append($liTag);
             })
-  
         $container.append($dateTag, $baseTag, $ulTag);
     }
-
 getCurrency();
