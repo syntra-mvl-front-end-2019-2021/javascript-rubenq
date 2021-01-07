@@ -1,4 +1,27 @@
 //https://docs.directus.io/api/items.html#the-item-object
+const showTodo = document.getElementById('show-todo');
+
+function isObject(val) {
+  if(val === null) {
+    return false;
+  }
+  return (typeof val === 'object');
+}
+
+function showTodos(todos) 
+{
+  console.log(todos);
+  for (let val in todos)
+  {
+    if(isObject(todos[val])){
+      for (let val2 in todos[val]) {
+        // console.log(val2, todos[val] [val2].id);
+        showTodo.innerHTML += '<div>Posted on: ' + todos[val][val2].created_on + '</div> <div>Todo: ' + todos[val] [val2].description + '</div><button class="remove-btn" onclick"deleteTodo(val, val2)">REMOVE</button><button class="edit-btn">EDIT</button><br>'
+      }
+    }
+    console.log(val, todos[val]);
+  }
+}
 
 function fetchAllTodos() {
     fetch('https://phpstack-224488-1624928.cloudwaysapps.com/_/items/todo', {
@@ -15,7 +38,8 @@ function fetchAllTodos() {
         return result.json();
       })
       .then(function(result) {
-        console.log(result)
+        console.log(result);
+        showTodos(result);
       })
       .catch(function(error){
         console.error(error)
@@ -80,7 +104,7 @@ function fetchAllTodos() {
       });
   }
   
-  function deleteTodo(id) {
+  function deletetodo(id) {
     fetch('https://phpstack-224488-1624928.cloudwaysapps.com/_/items/todo/' + id, {
       method: 'DELETE',
       headers: {
