@@ -15,8 +15,24 @@ const App = {
   
         this.lineTwo = parseInt('' + this.lineTwo + number);
       },
+      removeNumber() {
+        if (this.lineTwo === !null) {
+          this.lineTwo = null;
+          return;
+        }
+        this.lineTwo = parseInt('' + this.lineTwo + number);
+      },
       sum() {
         return this.lineOne + this.lineTwo;
+      },
+      minus() {
+        return this.lineOne - this.lineTwo;
+      },
+      product() {
+        return this.lineOne * this.lineTwo;
+      },
+      divide() {
+        return this.lineOne / this.lineTwo;
       },
       calculate() {
         if (
@@ -30,6 +46,12 @@ const App = {
         switch (this.symbol) {
           case '+':
             this.lineTwo = this.sum();
+          case '-':
+            this.lineTwo = this.minus();
+          case '*':
+            this.lineTwo = this.product();
+          case '/':
+            this.lineTwo = this.divide();
         }
   
         this.lineOne = null;
@@ -47,9 +69,9 @@ const App = {
   
   /**
    * [ ] styling
-   * [ ] product
-   * [ ] minus
-   * [ ] divide
+   * [X] product
+   * [X] minus
+   * [X] divide
    * [ ] root
    * [ ] power
    * [ ] backspace
